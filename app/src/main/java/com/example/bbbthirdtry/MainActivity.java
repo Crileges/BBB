@@ -39,9 +39,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         QuestList.createList();
+        //createTestDb(12);
 
         User.getUser();
         setBottomNavBarListeners();
+    }
+
+    public void createTestDb(int count){
+        for (int i = 0; i<count; i++){
+            QuestList.addOne(Quest.createTestQuest());
+        }
     }
 
     private void setBottomNavBarListeners() {

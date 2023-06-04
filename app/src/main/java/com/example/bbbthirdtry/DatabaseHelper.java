@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_POINTS, quest.getPoints().toString());
+        cv.put(COLUMN_POINTS, Points.getIntFromValue(quest.getPoints()));
         cv.put(COLUMN_QUEST_TITLE, quest.getTitle());
         cv.put(COLUMN_DESCRIPTION, quest.getDes());
         cv.put(COLUMN_CATEGORY, quest.getCategory().toString());
@@ -69,7 +69,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<Quest> getQuests(){
         List<Quest> retList = new ArrayList<>();
-
         String queryString = "SELECT * FROM " + QUEST_TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -86,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Double lat = cursor.getDouble(6);
                 Double lon = cursor.getDouble(7);
                 int radius = cursor.getInt(8);
-
+                Log.d("SQLite", Integer.toString(points));
                 Quest quest = new Quest(id, Points.convertToPoints(points), title, description, Categories.convertToCategory(category), done, lat, lon, radius);
                 Boolean check = retList.add(quest);
             } while (cursor.moveToNext());

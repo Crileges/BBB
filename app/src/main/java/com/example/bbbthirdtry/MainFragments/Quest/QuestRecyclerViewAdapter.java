@@ -4,6 +4,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         return new ViewHolder(FragmentQuestsItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
     }
 
     @Override
@@ -77,6 +76,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
             case SIGHTSEEING: categoryId = R.drawable.camera; break;
             case BAR: categoryId = R.drawable.bar; break;
             case THEATER: categoryId = R.drawable.theater; break;
+            default:categoryId = R.drawable.camera; break;
         }
         holder.ivQuestCardIcon.setBackgroundResource(categoryId);
 
@@ -85,8 +85,11 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
             case FIFTY: pointId = R.drawable.points50; break;
             case ONEHUDRED: pointId = R.drawable.points100; break;
             case TWOHUNDRED: pointId = R.drawable.points200; break;
+            default: pointId = R.drawable.points100; break;
         }
+
         holder.ivQuestCardPoints.setBackgroundResource(pointId);
+
     }
 
     private void claimQuest(ViewHolder holder){
