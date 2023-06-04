@@ -4,30 +4,42 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.bbbthirdtry.MainFragments.MapsFragment;
 import com.example.bbbthirdtry.MainFragments.ProfileFragment;
+import com.example.bbbthirdtry.MainFragments.Quest.Quest;
 import com.example.bbbthirdtry.MainFragments.Quest.QuestsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private static Context instance;
     //Fragments
     Fragment mapsFragment = new MapsFragment();
     Fragment questsFragment = new QuestsFragment();
     Fragment profileFragment = new ProfileFragment();
 
+    public static Context getContext() {
+        return instance;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         setContentView(R.layout.activity_main);
-        //DatabaseConnection.connect();
-        //DatabaseConnection.writeToUserTable(1);
+        QuestList.createList();
+        //QuestList.addOne(Quest.createTestQuest());
+        User.getUser();
         setBottomNavBarListeners();
     }
 

@@ -97,7 +97,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 holder.btnRoute.setBackgroundResource(R.drawable.questcardcomplete);
                 holder.btnClaim.setBackgroundResource(R.drawable.questcardcomplete);
                 holder.btnInfo.setBackgroundResource(R.drawable.questcardcomplete);
-                QuestList.completeQuest(holder.getAbsoluteAdapterPosition());
+                //QuestList.completeQuest(holder.getAbsoluteAdapterPosition());
                 User.getUser().points += Points.getIntFromValue(holder.quest.points);
                 //this.notifyItemMoved(position, position);
             }

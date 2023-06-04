@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.bbbthirdtry.DatabaseHelper;
+import com.example.bbbthirdtry.MainActivity;
+import com.example.bbbthirdtry.QuestList;
 import com.example.bbbthirdtry.R;
 
 /**
@@ -65,7 +68,7 @@ public class QuestsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new QuestRecyclerViewAdapter(QuestList.ITEMS));
+            recyclerView.setAdapter(new QuestRecyclerViewAdapter(QuestList.getQuestList()));
         }
         return view;
     }

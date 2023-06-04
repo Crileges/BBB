@@ -1,5 +1,7 @@
 package com.example.bbbthirdtry;
 
+import android.util.Log;
+
 import java.sql.Connection;
 
 public class User {
@@ -7,15 +9,16 @@ public class User {
     public int points = 0;
     public String name;
     public static User user;
+    public static boolean created = false;
 
     public User (String name){
-        DatabaseConnection.connect();
-        this.name = name;
+        created = true;
         user = this;
+        this.name = name;
     }
 
     public static User getUser(){
-        if(user == null){
+        if(!created){
             return new User("TestUser1");
         } else {
             return user;
