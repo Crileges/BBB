@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -35,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement =
-                "CREATE TABLE " + QUEST_TABLE + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_POINTS + " INT, " + COLUMN_QUEST_TITLE + " TEXT, " + COLUMN_DESCRIPTION + " TEXT, " + COLUMN_CATEGORY + " TEXT, " + COLUMN_DONE + " INT, " + COLUMN_LAT + " REAL, " + COLUMN_LON + ", REAL, " + COLUMN_RADIUS + " INT)";
+                "CREATE TABLE " + QUEST_TABLE + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_POINTS + " INT, " + COLUMN_QUEST_TITLE + " TEXT, " + COLUMN_DESCRIPTION + " TEXT, " + COLUMN_CATEGORY + " TEXT, " + COLUMN_DONE + " INT, " + COLUMN_LAT + " REAL, " + COLUMN_LON + " REAL, " + COLUMN_RADIUS + " INT)";
 
         db.execSQL(createTableStatement);
     }
@@ -51,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         cv.put(COLUMN_POINTS, quest.getPoints().toString());
         cv.put(COLUMN_QUEST_TITLE, quest.getTitle());
-        cv.put(COLUMN_DESCRIPTION, quest.getDes().toString());
+        cv.put(COLUMN_DESCRIPTION, quest.getDes());
         cv.put(COLUMN_CATEGORY, quest.getCategory().toString());
         cv.put(COLUMN_DONE, quest.isDone());
         cv.put(COLUMN_LAT, quest.getLat());
@@ -72,8 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String queryString = "SELECT * FROM " + QUEST_TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString, null);
 
+        Cursor cursor = db.rawQuery(queryString, null);
         if(cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
@@ -87,12 +88,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int radius = cursor.getInt(8);
 
                 Quest quest = new Quest(id, Points.convertToPoints(points), title, description, Categories.convertToCategory(category), done, lat, lon, radius);
-                retList.add(quest);
-            } while (cursor.moveToFirst());
+                Boolean check = retList.add(quest);
+            } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return null;
+        return retList;
     }
-
 }

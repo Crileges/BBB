@@ -17,8 +17,7 @@ import java.util.Map;
 
 public class QuestList {
 
-    private static List<Quest> questList = new ArrayList<Quest>();
-
+    private static List<Quest> questList = new ArrayList<>();
 
     public static void createList(){
         DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.getContext());
