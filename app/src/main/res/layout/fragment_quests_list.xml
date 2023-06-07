@@ -10,6 +10,5 @@
     app:layoutManager="LinearLayoutManager"
     tools:context=".MainFragments.Quest.QuestsFragment"
     tools:listitem="@layout/fragment_quests_item"
-    android:paddingTop="92dp"
     android:background="@color/white"
-    android:paddingBottom="32dp"/>
+    android:paddingBottom="40dp"/>

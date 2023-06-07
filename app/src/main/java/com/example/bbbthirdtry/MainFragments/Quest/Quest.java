@@ -14,12 +14,13 @@ public class Quest {
     boolean done;
     double lat;
     double lon;
-    int radius;
+    int popupRadius;
+    int claimRadius;
 
 
 
 
-    public Quest(int id, Points points, String title, String des, Categories category,boolean done, double lat, double lon, int radius) {
+    public Quest(int id, Points points, String title, String des, Categories category,boolean done, double lat, double lon, int popupRadius, int claimRadius) {
         this.id  = id;
         this.points = points;
         this.title = title;
@@ -28,7 +29,21 @@ public class Quest {
         this.done = done;
         this.lat = lat;
         this.lon = lon;
-        this.radius = radius;
+        this.popupRadius = popupRadius;
+        this.claimRadius = claimRadius;
+    }
+
+    public Quest(int id, int points, String title, String des, String category,boolean done, double lat, double lon, int popupRadius, int claimRadius) {
+        this.id  = id;
+        this.points = Points.convertToPoints(points);
+        this.title = title;
+        this.des = des;
+        this.category = Categories.convertToCategory(category);
+        this.done = done;
+        this.lat = lat;
+        this.lon = lon;
+        this.popupRadius = popupRadius;
+        this.claimRadius = claimRadius;
     }
 
     public static Quest createTestQuest(){
@@ -43,12 +58,7 @@ public class Quest {
         Categories categories = category[random.nextInt(points.length)];
 
 
-        return new Quest(0, point, title, "", categories,false,  0, 0, 10);
-    }
-
-    public static Quest createTestQuest2(int i){
-
-        return new Quest(0, Points.ONEHUDRED, Integer.toString(i), "", Categories.SIGHTSEEING, false, 0, 0, 10);
+        return new Quest(random.nextInt(234234312), point, title, "", categories,false,  52.520008, 13.404954, 100, 10);
     }
 
     public void completeQuest(){
@@ -61,6 +71,18 @@ public class Quest {
     }
     public int getId() {
         return id;
+    }
+
+    public void setPopupRadius(int popupRadius) {
+        this.popupRadius = popupRadius;
+    }
+
+    public int getClaimRadius() {
+        return claimRadius;
+    }
+
+    public void setClaimRadius(int claimRadius) {
+        this.claimRadius = claimRadius;
     }
 
     public void setId(int id) {
@@ -123,11 +145,11 @@ public class Quest {
         this.lon = lon;
     }
 
-    public int getRadius() {
-        return radius;
+    public int getPopupRadius() {
+        return popupRadius;
     }
 
-    public void setRadius(int radius) {
-        this.radius = radius;
+    public void getPopupRadius(int radius) {
+        this.popupRadius = radius;
     }
 }

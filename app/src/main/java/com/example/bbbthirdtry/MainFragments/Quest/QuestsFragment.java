@@ -24,10 +24,10 @@ import com.example.bbbthirdtry.R;
  */
 public class QuestsFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
+
+    public static RecyclerView rv;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -36,7 +36,6 @@ public class QuestsFragment extends Fragment {
     public QuestsFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static QuestsFragment newInstance(int columnCount) {
         QuestsFragment fragment = new QuestsFragment();
@@ -58,20 +57,21 @@ public class QuestsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_quests_list, container, false);
-
+        rv = (RecyclerView) inflater.inflate(R.layout.fragment_quests_list, container, false);
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            //Hier ist der Fehler
-            recyclerView.setAdapter(new QuestRecyclerViewAdapter(QuestList.getQuestList()));
+        Context context = rv.getContext();
+        RecyclerView recyclerView = rv;
+        if (mColumnCount <= 1) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        return view;
+        showQuestListInRv();
+        return rv;
+    }
+
+    public static void showQuestListInRv() {
+        QuestRecyclerViewAdapter adapter = new QuestRecyclerViewAdapter(QuestList.getDisplayList());
+        rv.setAdapter(adapter);
     }
 }

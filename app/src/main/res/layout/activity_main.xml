@@ -12,10 +12,10 @@
         android:name="com.example.bbbthirdtry.MainFragments.ProfileFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/vTopNav" />
 
     <View
         android:id="@+id/view2"
@@ -84,24 +84,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/vTopNav">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:background="@drawable/questcard"
-            android:hint="Search..."
-            android:textColorHint="@color/mainGrey"
-            android:textColor="@color/mainGrey"
-            android:paddingLeft="32dp"
-            android:layout_marginLeft="8dp"
-            android:textAllCaps="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TouchTargetSizeCheck" />
+
 
         <android.widget.Button
-            android:id="@+id/button"
+            android:id="@+id/btnFilter"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:background="@drawable/questcard"
@@ -109,10 +95,22 @@
             android:textAllCaps="true"
             android:textColor="@color/mainGrey"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="TouchTargetSizeCheck" />
+
+        <SearchView
+            android:id="@+id/svSearchBar"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/questcard"
+            android:queryHint="Search..."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:iconifiedByDefault="false"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -3,7 +3,8 @@ package com.example.bbbthirdtry.MainFragments.Quest;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.bbbthirdtry.QuestList;
 import com.example.bbbthirdtry.R;
 import com.example.bbbthirdtry.User;
 import com.example.bbbthirdtry.databinding.FragmentQuestsItemBinding;
@@ -19,10 +21,20 @@ import java.util.List;
 
 public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Quest> cardBtn;
+    public static void setList(List<Quest> list) {
+        QuestRecyclerViewAdapter.list = list;
+        if(adapter != null){
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
+    public static List<Quest> list;
+    public static QuestRecyclerViewAdapter adapter = null;
 
     public QuestRecyclerViewAdapter(List<Quest> items) {
-        cardBtn = items;
+        adapter = this;
+        list = items;
     }
 
     @Override
@@ -32,8 +44,11 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.quest = cardBtn.get(position);
+
+        holder.quest = list.get(position);
+
         setQuestIcons(holder);
+
         holder.cardBtn.setText(holder.quest.title);
         holder.cardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +75,10 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     }
 
     private void updateQuests(ViewHolder holder) {
+        holder.cardBtn.setBackgroundResource(R.drawable.questcard);
+        holder.btnRoute.setBackgroundResource(R.drawable.questcard);
+        holder.btnClaim.setBackgroundResource(R.drawable.questcard);
+        holder.btnInfo.setBackgroundResource(R.drawable.questcard);
         if (holder.quest.done){
             holder.ivQuestCardIcon.setBackgroundResource(R.drawable.check);
             holder.cardBtn.setBackgroundResource(R.drawable.questcardcomplete);
@@ -70,7 +89,6 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     }
 
     private void setQuestIcons(ViewHolder holder) {
-        holder.ivQuestCardIcon.setBackgroundResource(R.drawable.camera);
         int categoryId = 0;
         switch (holder.quest.category){
             case SIGHTSEEING: categoryId = R.drawable.camera; break;
@@ -94,23 +112,14 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
 
     private void claimQuest(ViewHolder holder){
         if(!holder.quest.done){
-            if(true){ //Radius überprüfen
-                holder.ivQuestCardIcon.setBackgroundResource(R.drawable.check);
-                holder.cardBtn.setBackgroundResource(R.drawable.questcardcomplete);
-                holder.btnRoute.setBackgroundResource(R.drawable.questcardcomplete);
-                holder.btnClaim.setBackgroundResource(R.drawable.questcardcomplete);
-                holder.btnInfo.setBackgroundResource(R.drawable.questcardcomplete);
-                //QuestList.completeQuest(holder.getAbsoluteAdapterPosition());
-                User.getUser().points += Points.getIntFromValue(holder.quest.points);
-                //this.notifyItemMoved(position, position);
-            }
+            QuestList.completeQuest(holder.quest);
+            QuestsFragment.showQuestListInRv();
         }
-
     }
 
     @Override
     public int getItemCount() {
-        return cardBtn.size();
+        return list.size();
     }
 
 

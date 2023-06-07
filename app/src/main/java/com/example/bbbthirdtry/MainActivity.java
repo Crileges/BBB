@@ -11,12 +11,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.bbbthirdtry.MainFragments.MapsFragment;
 import com.example.bbbthirdtry.MainFragments.ProfileFragment;
+import com.example.bbbthirdtry.MainFragments.Quest.Points;
 import com.example.bbbthirdtry.MainFragments.Quest.Quest;
 import com.example.bbbthirdtry.MainFragments.Quest.QuestsFragment;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private static Context instance;
     //Fragments
     Fragment mapsFragment = new MapsFragment();
-    Fragment questsFragment = new QuestsFragment();
+    public Fragment questsFragment = new QuestsFragment();
     Fragment profileFragment = new ProfileFragment();
 
     public static Context getContext() {
@@ -38,17 +41,59 @@ public class MainActivity extends AppCompatActivity {
         instance = this;
         setContentView(R.layout.activity_main);
 
+        changeToFragment(1);
+
         QuestList.createList();
-        //createTestDb(12);
+        deleteAll();
+        createTestDb();
+
 
         User.getUser();
+        setTopListeners();
         setBottomNavBarListeners();
     }
 
-    public void createTestDb(int count){
-        for (int i = 0; i<count; i++){
-            QuestList.addOne(Quest.createTestQuest());
-        }
+    private void setTopListeners() {
+        SearchView svSearchBar = (SearchView)findViewById(R.id.svSearchBar);
+        Button filterBtn = (Button)findViewById(R.id.btnFilter);
+        filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QuestList.filter.setFilterDone(!QuestList.filter.getFilterDone());
+                QuestList.updateDisplayList();
+            }
+        });
+        svSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                QuestList.filter.setFilterTitle(newText);
+                QuestList.updateDisplayList();
+                return false;
+            }
+        });
+    }
+
+    private void deleteAll() {
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        databaseHelper.DeletAll();
+        databaseHelper.close();
+    }
+
+    public void createTestDb(){
+
+        QuestList.addOne(new Quest(1, 200, "Checkpoint Charlie", "description", "SIGHTSEEING", false, 52.5074518478684, 13.39038871954682, 1000, 20));
+        QuestList.addOne(new Quest(2, 100, "Teil der Berliner Mauer", "description", "SIGHTSEEING", false, 52.509921621944194, 13.37631118215701, 1000, 30));
+        QuestList.addOne(new Quest(3, 100, "Potsdamer Platz", "description", "SIGHTSEEING", false, 52.50965666305416, 13.375950004785198, 1000, 50));
+        QuestList.addOne(new Quest(4, 50, "Deutsches Spionagemuseum", "description", "MUSEUM", false, 52.50879604343245, 13.379064025181943, 500, 20));
+        QuestList.addOne(new Quest(5, 100, "Weltzeituhr", "description", "SIGHTSEEING", false, 52.52118053131476, 13.413319515587947, 1000, 30));
+        QuestList.addOne(new Quest(6, 100, "Siegessäule", "description", "SIGHTSEEING", false, 52.51452877000894, 13.350114958019054, 2000, 100));
+        QuestList.addOne(new Quest(7, 100, "Berliner Dom", "description", "SIGHTSEEING", false, 52.519048839685155, 13.400825381035075, 2000, 50));
+
     }
 
     private void setBottomNavBarListeners() {
