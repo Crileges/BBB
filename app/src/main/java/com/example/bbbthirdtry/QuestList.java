@@ -25,6 +25,8 @@ public class QuestList {
 
     public static Filter filter;
 
+    public static Quest currentQuest = null;
+
 
 
     public static void createList(){
@@ -91,5 +93,14 @@ public class QuestList {
         updateDisplayList();
         databaseHelper.close();
         return ret;
+    }
+
+    public static Quest findQuestByTitle(String title){
+        for (Quest quest: QuestList.getDisplayList()) {
+            if(quest.getTitle() == title){
+                return quest;
+            }
+        }
+        return null;
     }
 }

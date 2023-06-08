@@ -75,10 +75,17 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     }
 
     private void updateQuests(ViewHolder holder) {
-        holder.cardBtn.setBackgroundResource(R.drawable.questcard);
-        holder.btnRoute.setBackgroundResource(R.drawable.questcard);
-        holder.btnClaim.setBackgroundResource(R.drawable.questcard);
-        holder.btnInfo.setBackgroundResource(R.drawable.questcard);
+        if(holder.quest.getCategory() == Categories.MAIN){
+            holder.cardBtn.setBackgroundResource(R.drawable.questcard_main);
+            holder.btnRoute.setBackgroundResource(R.drawable.questcard_main);
+            holder.btnClaim.setBackgroundResource(R.drawable.questcard_main);
+            holder.btnInfo.setBackgroundResource(R.drawable.questcard_main);
+        } else {
+            holder.cardBtn.setBackgroundResource(R.drawable.questcard);
+            holder.btnRoute.setBackgroundResource(R.drawable.questcard);
+            holder.btnClaim.setBackgroundResource(R.drawable.questcard);
+            holder.btnInfo.setBackgroundResource(R.drawable.questcard);
+        }
         if (holder.quest.done){
             holder.ivQuestCardIcon.setBackgroundResource(R.drawable.check);
             holder.cardBtn.setBackgroundResource(R.drawable.questcardcomplete);
@@ -95,6 +102,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
             case BAR: categoryId = R.drawable.bar; break;
             case THEATER: categoryId = R.drawable.theater; break;
             case MUSEUM: categoryId = R.drawable.museum; break;
+            case MAIN: categoryId = R.drawable.main_quest; break;
             default:categoryId = R.drawable.camera; break;
         }
         holder.ivQuestCardIcon.setBackgroundResource(categoryId);

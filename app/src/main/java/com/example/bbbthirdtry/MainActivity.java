@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static Context instance;
+    private static MainActivity mainActivity;
     //Fragments
     Fragment mapsFragment = new MapsFragment();
     public Fragment questsFragment = new QuestsFragment();
@@ -33,12 +35,14 @@ public class MainActivity extends AppCompatActivity {
     public static Context getContext() {
         return instance;
     }
+    public static Activity getMainActivity(){return mainActivity;}
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         instance = this;
+        mainActivity = this;
         setContentView(R.layout.activity_main);
 
         changeToFragment(1);
@@ -93,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
         QuestList.addOne(new Quest(5, 100, "Weltzeituhr", "description", "SIGHTSEEING", false, 52.52118053131476, 13.413319515587947, 1000, 30));
         QuestList.addOne(new Quest(6, 100, "Siegessäule", "description", "SIGHTSEEING", false, 52.51452877000894, 13.350114958019054, 2000, 100));
         QuestList.addOne(new Quest(7, 100, "Berliner Dom", "description", "SIGHTSEEING", false, 52.519048839685155, 13.400825381035075, 2000, 50));
-
+        //Main Quests
+        QuestList.addOne(new Quest(10, 200, "Brandenburger Tor", "description", "MAIN", false, 52.516326802983464, 13.377747012923937, Integer.MAX_VALUE, 50));
     }
 
     private void setBottomNavBarListeners() {
