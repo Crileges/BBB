@@ -5,7 +5,8 @@ public enum Categories {
     BAR,
     MAIN,
     THEATER,
-    MUSEUM;
+    MUSEUM,
+    FOOD;
 
 
     public static Categories convertToCategory(String category){
@@ -15,6 +16,7 @@ public enum Categories {
             case "BAR": return BAR;
             case "THEATER": return THEATER;
             case "MUSEUM": return MUSEUM;
+            case "FOOD": return FOOD;
         }
         return SIGHTSEEING;
     }

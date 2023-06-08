@@ -103,6 +103,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
             case THEATER: categoryId = R.drawable.theater; break;
             case MUSEUM: categoryId = R.drawable.museum; break;
             case MAIN: categoryId = R.drawable.main_quest; break;
+            case FOOD: categoryId = R.drawable.food; break;
             default:categoryId = R.drawable.camera; break;
         }
         holder.ivQuestCardIcon.setBackgroundResource(categoryId);

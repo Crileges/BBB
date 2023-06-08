@@ -92,12 +92,14 @@
             android:layout_height="40dp"
             android:background="@drawable/questcard"
             android:text="Filter"
+            android:paddingEnd="32dp"
             android:textAllCaps="true"
             android:textColor="@color/mainGrey"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginRight="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            style="?android:attr/borderlessButtonStyle"
             tools:ignore="TouchTargetSizeCheck" />
 
         <SearchView
@@ -111,6 +113,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:iconifiedByDefault="false"/>
+
+        <ImageView
+            android:id="@+id/ivFilterBtn"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:elevation="3dp"
+            android:background="@drawable/filter"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnFilter"
+            app:layout_constraintEnd_toEndOf="@+id/btnFilter"
+            app:layout_constraintTop_toTopOf="@+id/btnFilter" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

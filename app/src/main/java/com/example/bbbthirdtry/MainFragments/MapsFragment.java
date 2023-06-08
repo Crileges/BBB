@@ -60,6 +60,8 @@ public class MapsFragment extends Fragment {
                 case SIGHTSEEING:bitmapId = R.drawable.camaramarker; break;
                 case MAIN: bitmapId = R.drawable.mainmarker; break;
                 case MUSEUM: bitmapId = R.drawable.museummarker; break;
+                case THEATER: bitmapId = R.drawable.theatermarker; break;
+                case FOOD: bitmapId = R.drawable.foodmarker; break;
             }
             Bitmap b = BitmapFactory.decodeResource(getResources(), bitmapId);
             Bitmap markerIcon = Bitmap.createScaledBitmap(b, width, height, false);
