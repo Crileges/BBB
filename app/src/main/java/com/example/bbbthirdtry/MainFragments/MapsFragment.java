@@ -44,6 +44,7 @@ public class MapsFragment extends Fragment {
 
             LatLng berlin = new LatLng(52.520008, 13.404954);
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(berlin, 12));
+
         }
     };
 

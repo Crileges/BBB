@@ -13,7 +13,7 @@ public enum Categories {
             case "BAR": return BAR;
             case "THEATER": return THEATER;
             case "MUSEUM": return MUSEUM;
+            default: return SIGHTSEEING;
         }
-        return null;
     }
 }
