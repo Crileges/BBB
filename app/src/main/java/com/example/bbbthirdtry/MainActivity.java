@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         QuestList.setUpPossibleQuests();
 
         QuestList.createList();
+        setUpDatabase();
         //deleteAll();
         //createTestDb();
 
@@ -61,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
         User.getUser();
         setTopListeners();
         setBottomNavBarListeners();
+    }
+
+    private void setUpDatabase() {
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        if(databaseHelper.getQuests().size() > 1){
+            return;
+        }
+        createDb();
+        databaseHelper.close();
     }
 
     private void setTopListeners() {
@@ -103,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         databaseHelper.close();
     }
 
-    public void createTestDb(){
+    public void createDb(){
 
         //Main Quests
         QuestList.addOne(new Quest(0, 200, "Brandenburger Tor", "description", "MAIN", false, 52.516326802983464, 13.377747012923937, Integer.MAX_VALUE, 30));
@@ -116,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
         QuestList.addOne(new Quest(7, 200, "KulturBrauerei", "description", "MAIN", false, 52.53822927444323, 13.412756212925057, Integer.MAX_VALUE, 30));
         //Main Quests
 
+        //später weg mit dem Lachs
         List<Quest> possibleQuests = QuestList.getPossibleQuests();
         for (Quest quest: possibleQuests)   {
             QuestList.addOne(quest);

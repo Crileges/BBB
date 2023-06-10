@@ -45,8 +45,9 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.quest = list.get(position);
-        updateQuests(holder);
         setQuestIcons(holder);
+        updateQuests(holder);
+
 
         holder.cardBtn.setText(holder.quest.title);
         holder.cardBtn.setOnClickListener(new View.OnClickListener() {
