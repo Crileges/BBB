@@ -23,6 +23,8 @@ import com.example.bbbthirdtry.MainFragments.Quest.Quest;
 import com.example.bbbthirdtry.MainFragments.Quest.QuestsFragment;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity mainActivity;
     boolean filterActive = false;
     //Fragments
-    Fragment mapsFragment = new MapsFragment();
+    MapsFragment mapsFragment = new MapsFragment();
     public Fragment questsFragment = new QuestsFragment();
     Fragment profileFragment = new ProfileFragment();
 
@@ -49,9 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         changeToFragment(1);
 
+        QuestList.setUpPossibleQuests();
+
         QuestList.createList();
-        deleteAll();
-        createTestDb();
+        //deleteAll();
+        //createTestDb();
 
 
         User.getUser();
@@ -74,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 filterActive = !filterActive;
                 QuestList.filter.setFilterDone(!QuestList.filter.getFilterDone());
                 QuestList.updateDisplayList();
+                mapsFragment.loadMarkers();
             }
         });
         svSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -86,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 QuestList.filter.setFilterTitle(newText);
                 QuestList.updateDisplayList();
+                mapsFragment.loadMarkers();
                 return false;
             }
         });
@@ -99,34 +105,27 @@ public class MainActivity extends AppCompatActivity {
 
     public void createTestDb(){
 
-        QuestList.addOne(new Quest(1, 200, "Checkpoint Charlie", "description", "SIGHTSEEING", false, 52.5074518478684, 13.39038871954682, 1000, 20));
-        QuestList.addOne(new Quest(2, 100, "Teil der Berliner Mauer", "description", "SIGHTSEEING", false, 52.509921621944194, 13.37631118215701, 1000, 30));
-        QuestList.addOne(new Quest(3, 100, "Potsdamer Platz", "description", "SIGHTSEEING", false, 52.50965666305416, 13.375950004785198, 1000, 50));
-        QuestList.addOne(new Quest(4, 50, "Deutsches Spionagemuseum", "description", "MUSEUM", false, 52.50879604343245, 13.379064025181943, 500, 20));
-        QuestList.addOne(new Quest(5, 100, "Weltzeituhr", "description", "SIGHTSEEING", false, 52.52118053131476, 13.413319515587947, 1000, 30));
-        QuestList.addOne(new Quest(6, 100, "Siegessäule", "description", "SIGHTSEEING", false, 52.51452877000894, 13.350114958019054, 2000, 100));
-        QuestList.addOne(new Quest(7, 100, "Berliner Dom", "description", "SIGHTSEEING", false, 52.519048839685155, 13.400825381035075, 2000, 50));
-        QuestList.addOne(new Quest(8, 50, "Max und Moritz", "description", "FOOD", false, 52.53386455355585, 13.436680147659208, 500, 20));
-        QuestList.addOne(new Quest(9, 50, "Markthalle Neun", "description", "FOOD", false, 52.50207562003517, 13.431924468601116, 500, 35));
         //Main Quests
-        QuestList.addOne(new Quest(10, 200, "Brandenburger Tor", "description", "MAIN", false, 52.516326802983464, 13.377747012923937, Integer.MAX_VALUE, 30));
-        QuestList.addOne(new Quest(11, 200, "Fernsehturm", "description", "MAIN", false, 52.52089331038345, 13.409494199433652, Integer.MAX_VALUE, 30));
-        QuestList.addOne(new Quest(12, 200, "Kurfürstendamm", "description", "MAIN", false, 52.50460146835356, 13.33510963171975, Integer.MAX_VALUE, 200));
-        QuestList.addOne(new Quest(13, 200, "Schloss Charlottenburg", "description", "MAIN", false, 52.51670034147666, 13.304078423736792, Integer.MAX_VALUE, 30));
-        QuestList.addOne(new Quest(13, 200, "Schloss Schönhausen", "description", "MAIN", false, 52.57900199927118, 13.405272277984105, Integer.MAX_VALUE, 30));
+        QuestList.addOne(new Quest(0, 200, "Brandenburger Tor", "description", "MAIN", false, 52.516326802983464, 13.377747012923937, Integer.MAX_VALUE, 30));
+        QuestList.addOne(new Quest(1, 200, "Fernsehturm", "description", "MAIN", false, 52.52089331038345, 13.409494199433652, Integer.MAX_VALUE, 30));
+        QuestList.addOne(new Quest(2, 200, "Kurfürstendamm", "description", "MAIN", false, 52.50460146835356, 13.33510963171975, Integer.MAX_VALUE, 200));
+        QuestList.addOne(new Quest(3, 200, "Schloss Charlottenburg", "description", "MAIN", false, 52.51670034147666, 13.304078423736792, Integer.MAX_VALUE, 30));
+        QuestList.addOne(new Quest(4, 200, "Schloss Schönhausen", "description", "MAIN", false, 52.57900199927118, 13.405272277984105, Integer.MAX_VALUE, 30));
+        QuestList.addOne(new Quest(5, 200, "Mustafa's Gemüse Kebap", "description", "MAIN", false, 52.494349136065665, 13.388105268070634, Integer.MAX_VALUE, 30));
+        QuestList.addOne(new Quest(6, 200, "Oberbaumbrücke", "description", "MAIN", false, 52.5017754462656, 13.445614006524359, Integer.MAX_VALUE, 30));
+        QuestList.addOne(new Quest(7, 200, "KulturBrauerei", "description", "MAIN", false, 52.53822927444323, 13.412756212925057, Integer.MAX_VALUE, 30));
         //Main Quests
-        QuestList.addOne(new Quest(21, 50, "BurgerAMT", "description", "FOOD", false, 52.51024275236238, 13.459614990134558, 500, 20));
-        QuestList.addOne(new Quest(22, 50, "Rüyam Gemüse Kebab", "description", "FOOD", false, 52.48467988853361, 13.35391909693803, 500, 40));
-        QuestList.addOne(new Quest(23, 50, "Konopke’s Imbiss", "description", "FOOD", false, 52.54043269944165, 13.41217908727278, 500, 30));
-        QuestList.addOne(new Quest(24, 50, "ZOLA", "description", "FOOD", false, 52.49609656595152, 13.422335884596867, 500, 30));
-        QuestList.addOne(new Quest(25, 50, "Curry 36", "description", "FOOD", false, 52.49347321664647, 13.387699121005994, 500, 20));
-        QuestList.addOne(new Quest(26, 50, "Ratibortheater", "description", "THEATER", false, 52.49739217205829, 13.443421079644898, 500, 50));
+
+        List<Quest> possibleQuests = QuestList.getPossibleQuests();
+        for (Quest quest: possibleQuests)   {
+            QuestList.addOne(quest);
+        }
     }
 
     private void setBottomNavBarListeners() {
-        ImageButton mapsBtn = (ImageButton)findViewById(R.id.ibMap);
-        ImageButton questBtn = (ImageButton)findViewById(R.id.ibFlag);
-        ImageButton profileBtn = (ImageButton)findViewById(R.id.ibDiamond);
+        ImageButton mapsBtn = findViewById(R.id.ibMap);
+        ImageButton questBtn = findViewById(R.id.ibFlag);
+        ImageButton profileBtn = findViewById(R.id.ibDiamond);
 
         mapsBtn.setOnClickListener(new View.OnClickListener() {
             @Override

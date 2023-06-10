@@ -26,7 +26,6 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
         if(adapter != null){
             adapter.notifyDataSetChanged();
         }
-
     }
 
     public static List<Quest> list;
@@ -46,7 +45,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.quest = list.get(position);
-
+        updateQuests(holder);
         setQuestIcons(holder);
 
         holder.cardBtn.setText(holder.quest.title);
@@ -57,7 +56,6 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 showOrNotShowMoreOptions(holder);
             }
         });
-        updateQuests(holder);
         holder.btnClaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

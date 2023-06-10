@@ -3,6 +3,7 @@ package com.example.bbbthirdtry;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -41,13 +42,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement =
                 "CREATE TABLE " + QUEST_TABLE + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_POINTS + " INT, " + COLUMN_QUEST_TITLE + " TEXT, " + COLUMN_DESCRIPTION + " TEXT, " + COLUMN_CATEGORY + " TEXT, " + COLUMN_DONE + " INT, " + COLUMN_LAT + " REAL, " + COLUMN_LON + " REAL, " + COLUMN_POPUPRADIUS + " INT, " + COLUMN_CLAIMRADIUS + " INT)";
-
         db.execSQL(createTableStatement);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 
     public boolean addOne(Quest quest){

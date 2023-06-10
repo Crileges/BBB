@@ -10,9 +10,8 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.location.Location;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +26,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -35,22 +33,27 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsFragment extends Fragment {
 
+    static GoogleMap googleMap;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
+
+        @SuppressLint("MissingPermission")
         @Override
         public void onMapReady(GoogleMap googleMap) {
+            MapsFragment.googleMap = googleMap;
             enableMyLocation(googleMap);
-            loadMarkers(googleMap);
-            LatLng berlin = new LatLng(52.520008, 13.404954);
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(berlin, 12));
+            loadMarkers();
+            LatLng myLocation = new LatLng(52.51729131360452, 13.406878968403063);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
         }
     };
 
+    public void loadMarkers(){
+        if(googleMap != null){
+            googleMap.clear();
+        }
 
-
-
-    public void loadMarkers(GoogleMap googleMap){
         for (Quest quest: QuestList.getDisplayList()) {
             LatLng markerPos = new LatLng(quest.getLat(), quest.getLon());
             int height = 120;
@@ -65,23 +68,30 @@ public class MapsFragment extends Fragment {
             }
             Bitmap b = BitmapFactory.decodeResource(getResources(), bitmapId);
             Bitmap markerIcon = Bitmap.createScaledBitmap(b, width, height, false);
-            googleMap.addMarker(new MarkerOptions().position(markerPos).title(quest.getTitle()).icon(BitmapDescriptorFactory.fromBitmap(markerIcon)));
-        }
-        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                changeCurrentElement(marker);
-                changeTopNavBar();
-                return false;
+            Log.d("loadMarkers", "loadMarkers Test");
+            if(googleMap != null){
+                MarkerOptions marker1 = new MarkerOptions().position(markerPos).title(quest.getTitle()).icon(BitmapDescriptorFactory.fromBitmap(markerIcon));
+                googleMap.addMarker(marker1);
             }
-        });
+        }
+        if(googleMap != null){
+            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
+                    changeCurrentElement(marker);
+                    changeTopNavBar();
+                    return false;
+                }
+            });
+        }
+
     }
 
-    private void changeCurrentElement(Marker marker) {
+    private static void changeCurrentElement(Marker marker) {
         QuestList.currentQuest = QuestList.findQuestByTitle(marker.getTitle());
     }
 
-    private void changeTopNavBar() {
+    private static void changeTopNavBar() {
 
     }
 
@@ -100,6 +110,7 @@ public class MapsFragment extends Fragment {
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapsFragment);
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
+            loadMarkers();
         }
     }
 
