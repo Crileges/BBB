@@ -1,11 +1,8 @@
 package com.example.bbbthirdtry;
 
-import android.util.Log;
-
 import java.sql.Connection;
 
 public class User {
-    Connection connection = null;
     public int points = 0;
     public String name;
     public static User user;

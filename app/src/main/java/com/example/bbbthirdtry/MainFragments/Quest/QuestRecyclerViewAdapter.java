@@ -3,9 +3,6 @@ package com.example.bbbthirdtry.MainFragments.Quest;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +11,6 @@ import android.widget.ImageView;
 
 import com.example.bbbthirdtry.QuestList;
 import com.example.bbbthirdtry.R;
-import com.example.bbbthirdtry.User;
 import com.example.bbbthirdtry.databinding.FragmentQuestsItemBinding;
 
 import java.util.List;

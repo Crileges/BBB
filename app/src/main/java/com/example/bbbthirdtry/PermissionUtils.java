@@ -1,20 +1,10 @@
 package com.example.bbbthirdtry;
 
-import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.DialogFragment;
-
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Utility class for access to runtime permissions.

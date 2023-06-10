@@ -1,7 +1,5 @@
 package com.example.bbbthirdtry.MainFragments.Quest;
 
-import androidx.annotation.NonNull;
-
 import java.util.Random;
 
 public class Quest {

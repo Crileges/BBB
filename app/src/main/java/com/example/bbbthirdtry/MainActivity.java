@@ -6,22 +6,17 @@ import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.bbbthirdtry.MainFragments.MapsFragment;
 import com.example.bbbthirdtry.MainFragments.ProfileFragment;
-import com.example.bbbthirdtry.MainFragments.Quest.Points;
 import com.example.bbbthirdtry.MainFragments.Quest.Quest;
 import com.example.bbbthirdtry.MainFragments.Quest.QuestsFragment;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 

@@ -8,20 +8,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.example.bbbthirdtry.DatabaseHelper;
-import com.example.bbbthirdtry.MainActivity;
 import com.example.bbbthirdtry.QuestList;
 import com.example.bbbthirdtry.R;
 
-/**
- * A fragment representing a list of Items.
- */
 public class QuestsFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -29,10 +22,6 @@ public class QuestsFragment extends Fragment {
 
     public static RecyclerView rv;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public QuestsFragment() {
     }
 

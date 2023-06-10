@@ -3,19 +3,15 @@ package com.example.bbbthirdtry;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.example.bbbthirdtry.MainFragments.Quest.Categories;
 import com.example.bbbthirdtry.MainFragments.Quest.Points;
 import com.example.bbbthirdtry.MainFragments.Quest.Quest;
-import com.example.bbbthirdtry.MainFragments.Quest.QuestRecyclerViewAdapter;
 import com.example.bbbthirdtry.MainFragments.Quest.QuestsFragment;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;

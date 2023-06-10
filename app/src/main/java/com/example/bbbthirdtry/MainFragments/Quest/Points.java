@@ -1,7 +1,5 @@
 package com.example.bbbthirdtry.MainFragments.Quest;
 
-import com.example.bbbthirdtry.R;
-
 public enum Points {
     FIFTY,
     ONEHUDRED,

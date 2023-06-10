@@ -1,21 +1,12 @@
 package com.example.bbbthirdtry;
 
-import android.util.Log;
-
-import com.example.bbbthirdtry.DatabaseHelper;
-import com.example.bbbthirdtry.MainActivity;
 import com.example.bbbthirdtry.MainFragments.Quest.Points;
 import com.example.bbbthirdtry.MainFragments.Quest.Quest;
 import com.example.bbbthirdtry.MainFragments.Quest.QuestRecyclerViewAdapter;
-import com.example.bbbthirdtry.MainFragments.Quest.QuestsFragment;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class QuestList {
@@ -23,7 +14,7 @@ public class QuestList {
     private static List<Quest> questList = new ArrayList<>();
     private static List<Quest> displayList = new ArrayList<>();
 
-    private static List<Quest> possibleQuests = new ArrayList<>();
+    private static final List<Quest> possibleQuests = new ArrayList<>();
 
     public static Filter filter;
 
@@ -72,12 +63,12 @@ public class QuestList {
         displayList.clear();
         for (Quest quest: questList) {
 
-            if(filter.getFilterTitle() != ""){
+            if(!filter.getFilterTitle().equals("")){
                 if(!quest.getTitle().toLowerCase().contains(filter.filterTitle.toLowerCase())){
                     continue;
                 }
             }
-            if(filter.filterDone != false){
+            if(filter.filterDone){
                 if(quest.isDone()){
                     continue;
                 }
@@ -131,7 +122,7 @@ public class QuestList {
 
     public static Quest findQuestByTitle(String title){
         for (Quest quest: QuestList.getDisplayList()) {
-            if(quest.getTitle() == title){
+            if(quest.getTitle().equals(title)){
                 return quest;
             }
         }

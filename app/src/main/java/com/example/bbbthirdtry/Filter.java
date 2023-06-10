@@ -1,7 +1,5 @@
 package com.example.bbbthirdtry;
 
-import android.util.Log;
-
 public class Filter {
 
     String filterTitle = "";
