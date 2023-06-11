@@ -3,6 +3,8 @@ package com.example.bbbthirdtry.MainFragments.Quest;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.location.Location;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 
 import com.example.bbbthirdtry.QuestList;
 import com.example.bbbthirdtry.R;
+import com.example.bbbthirdtry.User;
 import com.example.bbbthirdtry.databinding.FragmentQuestsItemBinding;
 
 import java.util.List;
@@ -117,8 +120,14 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
 
     private void claimQuest(ViewHolder holder){
         if(!holder.quest.done){
-            QuestList.completeQuest(holder.quest);
-            QuestsFragment.showQuestListInRv();
+            Location targetLocation = new Location("");
+            targetLocation.setLatitude(holder.quest.getLat());
+            targetLocation.setLongitude(holder.quest.getLon());
+            float distanceInMeters =  targetLocation.distanceTo(User.getUser().currentLocation);
+            if(distanceInMeters <= holder.quest.claimRadius){
+                QuestList.completeQuest(holder.quest);
+                QuestsFragment.showQuestListInRv();
+            }
         }
     }
 

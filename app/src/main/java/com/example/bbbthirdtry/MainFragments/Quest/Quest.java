@@ -44,25 +44,6 @@ public class Quest {
         this.claimRadius = claimRadius;
     }
 
-    public static Quest createTestQuest(){
-        Random random = new Random();
-
-        String [] titles = {"Märchenbrunnen", "Kletterfelsen", "Saphirbar", "Zeiss Großplanetarium"};
-        Points [] points = {Points.FIFTY, Points.ONEHUDRED, Points.TWOHUNDRED};
-        Categories [] category = {Categories.SIGHTSEEING, Categories.BAR, Categories.THEATER};
-
-        String title  = titles[random.nextInt(titles.length)];
-        Points point = points[random.nextInt(points.length)];
-        Categories categories = category[random.nextInt(points.length)];
-
-
-        return new Quest(random.nextInt(234234312), point, title, "", categories,false,  52.520008, 13.404954, 100, 10);
-    }
-
-    public void completeQuest(){
-        done = true;
-    }
-
     @Override
     public String toString() {
         return title + " " + done;

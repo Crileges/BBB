@@ -10,6 +10,8 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import com.example.bbbthirdtry.MainFragments.Quest.Quest;
 import com.example.bbbthirdtry.PermissionUtils;
 import com.example.bbbthirdtry.QuestList;
 import com.example.bbbthirdtry.R;
+import com.example.bbbthirdtry.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,7 +44,7 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             MapsFragment.googleMap = googleMap;
-            enableMyLocation(googleMap);
+            enableMyLocation();
             loadMarkers();
             LatLng myLocation = new LatLng(52.51729131360452, 13.406878968403063);
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
@@ -67,7 +70,6 @@ public class MapsFragment extends Fragment {
             }
             Bitmap b = BitmapFactory.decodeResource(getResources(), bitmapId);
             Bitmap markerIcon = Bitmap.createScaledBitmap(b, width, height, false);
-            Log.d("loadMarkers", "loadMarkers Test");
             if(googleMap != null){
                 MarkerOptions marker1 = new MarkerOptions().position(markerPos).title(quest.getTitle()).icon(BitmapDescriptorFactory.fromBitmap(markerIcon));
                 googleMap.addMarker(marker1);
@@ -114,7 +116,7 @@ public class MapsFragment extends Fragment {
     }
 
     @SuppressLint("MissingPermission")
-    private void enableMyLocation(GoogleMap googleMap) {
+    public void enableMyLocation() {
         // [START maps_check_location_permission]
         // 1. Check if permissions are granted, if so, enable the my location layer
         if (ContextCompat.checkSelfPermission(MainActivity.getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -126,5 +128,6 @@ public class MapsFragment extends Fragment {
         }
         PermissionUtils.requestLocationPermissions(MainActivity.getMainActivity(), LOCATION_PERMISSION_REQUEST_CODE, true);
     }
+
 
 }

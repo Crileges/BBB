@@ -61,7 +61,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/expandedBtns"
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:animateLayoutChanges="true"

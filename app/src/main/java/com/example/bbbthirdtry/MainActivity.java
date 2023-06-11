@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static Context instance;
     private static MainActivity mainActivity;
-    boolean filterActive = false;
+    public boolean filterActive = false;
     //Fragments
-    MapsFragment mapsFragment = new MapsFragment();
+    public MapsFragment mapsFragment = new MapsFragment();
     public Fragment questsFragment = new QuestsFragment();
     Fragment profileFragment = new ProfileFragment();
 
@@ -36,10 +37,15 @@ public class MainActivity extends AppCompatActivity {
     }
     public static Activity getMainActivity(){return mainActivity;}
 
+    public static MapsFragment getMapsFragment() {
+        return MainActivity.mainActivity.mapsFragment;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         instance = this;
         mainActivity = this;
         setContentView(R.layout.activity_main);
@@ -51,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
         QuestList.createList();
         setUpDatabase();
         //deleteAll();
-        //createTestDb();
-
 
         User.getUser();
         setTopListeners();
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         createDb();
+
         databaseHelper.close();
     }
 
@@ -119,13 +124,8 @@ public class MainActivity extends AppCompatActivity {
         QuestList.addOne(new Quest(5, 200, "Mustafa's Gemüse Kebap", "description", "MAIN", false, 52.494349136065665, 13.388105268070634, Integer.MAX_VALUE, 30));
         QuestList.addOne(new Quest(6, 200, "Oberbaumbrücke", "description", "MAIN", false, 52.5017754462656, 13.445614006524359, Integer.MAX_VALUE, 30));
         QuestList.addOne(new Quest(7, 200, "KulturBrauerei", "description", "MAIN", false, 52.53822927444323, 13.412756212925057, Integer.MAX_VALUE, 30));
+        QuestList.addOne(new Quest(8, 200, "Spezibande Headquater", "description", "MAIN", false, 52.54189580873832, 13.4175260884276, Integer.MAX_VALUE, 30));
         //Main Quests
-
-        //später weg mit dem Lachs
-        List<Quest> possibleQuests = QuestList.getPossibleQuests();
-        for (Quest quest: possibleQuests)   {
-            QuestList.addOne(quest);
-        }
     }
 
     private void setBottomNavBarListeners() {
