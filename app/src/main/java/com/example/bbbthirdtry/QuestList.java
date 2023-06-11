@@ -90,8 +90,6 @@ public class QuestList {
         }
         sortList();
         QuestRecyclerViewAdapter.setList(displayList);
-
-
     }
 
     private static void sortList() {

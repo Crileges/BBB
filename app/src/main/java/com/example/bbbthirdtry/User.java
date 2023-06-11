@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.bbbthirdtry.MainFragments.MapsFragment;
 import com.example.bbbthirdtry.MainFragments.Quest.Quest;
+import com.example.bbbthirdtry.MainFragments.Quest.QuestRecyclerViewAdapter;
 import com.example.bbbthirdtry.MainFragments.Quest.QuestsFragment;
 
 import java.sql.Connection;
@@ -61,7 +62,10 @@ public class User implements LocationListener {
                 targetLocation.setLongitude(quest.getLon());
                 float distanceInMeters =  targetLocation.distanceTo(location);
                 if(distanceInMeters <= quest.getPopupRadius()){
-                    QuestList.addOne(quest);
+                    if(QuestList.findQuestByTitle(quest.getTitle()) == null) {
+                        QuestList.addOne(quest);
+                    }
+                    QuestRecyclerViewAdapter.setList(QuestList.getDisplayList());
                     //fügt forever neue Quests ein kp wie zu fixen
                     return;
                 }

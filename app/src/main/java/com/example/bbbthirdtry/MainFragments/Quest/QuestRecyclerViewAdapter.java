@@ -24,6 +24,8 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
         QuestRecyclerViewAdapter.list = list;
         if(adapter != null){
             adapter.notifyDataSetChanged();
+        } else {
+            adapter = new QuestRecyclerViewAdapter(list);
         }
     }
 
