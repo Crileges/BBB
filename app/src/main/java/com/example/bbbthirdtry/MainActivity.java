@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean filterActive = false;
     //Fragments
     public MapsFragment mapsFragment = new MapsFragment();
-    public Fragment questsFragment = new QuestsFragment();
+    public QuestsFragment questsFragment = new QuestsFragment();
     Fragment profileFragment = new ProfileFragment();
 
     public static Context getContext() {
@@ -55,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
         QuestList.setUpPossibleQuests();
 
         QuestList.createList();
+
+        deleteAll(); //resets All Quests, Debugging only
         setUpDatabase();
-        //deleteAll();
 
         User.getUser();
         setTopListeners();
         setBottomNavBarListeners();
+
     }
 
     private void setUpDatabase() {
@@ -69,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         createDb();
-
         databaseHelper.close();
     }
 

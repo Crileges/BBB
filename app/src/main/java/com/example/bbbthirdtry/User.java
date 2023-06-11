@@ -26,6 +26,7 @@ public class User implements LocationListener {
     public static boolean created = false;
 
     public User(String name) {
+
         created = true;
         user = this;
         this.name = name;
@@ -35,9 +36,12 @@ public class User implements LocationListener {
             MapsFragment mapsFragment = MainActivity.getMapsFragment();
             mapsFragment.enableMyLocation();
         }
+
         //GPS on Emulator
+        Log.d("testLocation", "test1");
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
         //Network only on Real Device
+        Log.d("testLocation", "test2");
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
     }
 
@@ -52,14 +56,19 @@ public class User implements LocationListener {
     @Override
     public void onLocationChanged(@NonNull Location location) {
         User.getUser().currentLocation = location;
-        for (Quest quest: QuestList.getPossibleQuests()) {
-            Location targetLocation = new Location("");
-            targetLocation.setLatitude(quest.getLat());
-            targetLocation.setLongitude(quest.getLon());
-            float distanceInMeters =  targetLocation.distanceTo(User.getUser().currentLocation);
-            if(distanceInMeters <= quest.getPopupRadius()){
-                QuestList.addOne(quest);
-                QuestsFragment.showQuestListInRv();
+        if(QuestList.getPossibleQuests().size()>1){
+            for (Quest quest: QuestList.getPossibleQuests()) {
+                Location targetLocation = new Location("");
+                targetLocation.setLatitude(quest.getLat());
+                targetLocation.setLongitude(quest.getLon());
+                float distanceInMeters =  targetLocation.distanceTo(location);
+                if(distanceInMeters <= quest.getPopupRadius()){
+                    QuestList.addOne(quest);
+                    int index = QuestList.getPossibleQuests().indexOf(quest);
+                    Log.d("testLocation", Integer.toString(index));
+                    QuestList.getPossibleQuests().remove(index);
+                    return;
+                }
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.example.bbbthirdtry;
 
+import android.util.Log;
+
 import com.example.bbbthirdtry.MainFragments.Quest.Points;
 import com.example.bbbthirdtry.MainFragments.Quest.Quest;
 import com.example.bbbthirdtry.MainFragments.Quest.QuestRecyclerViewAdapter;
@@ -37,7 +39,7 @@ public class QuestList {
         possibleQuests.add((new Quest(20, 50, "Kletterfelsen", "description", "SIGHTSEEING", false, 52.528187938698494, 13.441261222759106, 500, 50)));
         possibleQuests.add((new Quest(21, 50, "BurgerAMT", "description", "FOOD", false, 52.51024275236238, 13.459614990134558, 500, 20)));
         possibleQuests.add((new Quest(22, 50, "Rüyam Gemüse Kebab", "description", "FOOD", false, 52.48467988853361, 13.35391909693803, 500, 40)));
-        possibleQuests.add((new Quest(23, 50, "Konopke’s Imbiss", "description", "FOOD", false, 52.54043269944165, 13.41217908727278, 500, 30)));
+        possibleQuests.add((new Quest(23, 50, "Konopke’s Imbiss", "description", "FOOD", false, 52.54043269944165, 13.41217908727278, 500, 500)));
         possibleQuests.add((new Quest(24, 50, "ZOLA", "description", "FOOD", false, 52.49609656595152, 13.422335884596867, 500, 30)));
         possibleQuests.add((new Quest(25, 50, "Curry 36", "description", "FOOD", false, 52.49347321664647, 13.387699121005994, 500, 20)));
         possibleQuests.add((new Quest(26, 50, "Ratibortheater", "description", "THEATER", false, 52.49739217205829, 13.443421079644898, 500, 50)));
