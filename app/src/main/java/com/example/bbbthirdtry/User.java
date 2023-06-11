@@ -38,10 +38,8 @@ public class User implements LocationListener {
         }
 
         //GPS on Emulator
-        Log.d("testLocation", "test1");
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
         //Network only on Real Device
-        Log.d("testLocation", "test2");
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
     }
 
@@ -64,9 +62,7 @@ public class User implements LocationListener {
                 float distanceInMeters =  targetLocation.distanceTo(location);
                 if(distanceInMeters <= quest.getPopupRadius()){
                     QuestList.addOne(quest);
-                    int index = QuestList.getPossibleQuests().indexOf(quest);
-                    Log.d("testLocation", Integer.toString(index));
-                    QuestList.getPossibleQuests().remove(index);
+                    //fügt forever neue Quests ein kp wie zu fixen
                     return;
                 }
             }

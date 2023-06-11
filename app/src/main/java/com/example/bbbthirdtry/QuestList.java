@@ -25,6 +25,7 @@ public class QuestList {
     public static List<Quest> getPossibleQuests(){
         return possibleQuests;
     }
+    public static List<Quest> getQuestList(){return questList;}
 
     public static void setUpPossibleQuests(){
         possibleQuests.add((new Quest(11, 200, "Checkpoint Charlie", "description", "SIGHTSEEING", false, 52.5074518478684, 13.39038871954682, 1000, 20)));
@@ -53,6 +54,16 @@ public class QuestList {
         QuestRecyclerViewAdapter.setList(displayList);
         updateDisplayList();
         databaseHelper.close();
+    }
+
+    public static boolean checkIfQuestsExists(Quest testQuest){
+        String title = testQuest.getTitle();
+        for (Quest quest: questList) {
+            if(quest.getTitle() == title){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void updateList(){
