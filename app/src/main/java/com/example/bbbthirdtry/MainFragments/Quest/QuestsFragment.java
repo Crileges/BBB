@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,5 +63,9 @@ public class QuestsFragment extends Fragment {
     public static void showQuestListInRv() {
         QuestRecyclerViewAdapter adapter = new QuestRecyclerViewAdapter(QuestList.getDisplayList());
         rv.setAdapter(adapter);
+        rv.getAdapter().notifyDataSetChanged();
+        Log.d("testcase", Integer.toString(rv.getAdapter().getItemCount()));
+        Log.d("testcase", Integer.toString(QuestList.getDisplayList().size()));
+        Log.d("testcase", QuestList.getDisplayList().toString());
     }
 }
