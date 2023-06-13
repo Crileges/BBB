@@ -23,6 +23,10 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     public static void setList(List<Quest> list) {
         QuestRecyclerViewAdapter.list = list;
         if(adapter != null){
+            adapter.getItemCount();
+            Log.d("tests", Integer.toString(QuestList.getDisplayList().size()));
+
+            adapter = new QuestRecyclerViewAdapter(QuestList.getDisplayList());
             adapter.notifyDataSetChanged();
         } else {
             adapter = new QuestRecyclerViewAdapter(list);
