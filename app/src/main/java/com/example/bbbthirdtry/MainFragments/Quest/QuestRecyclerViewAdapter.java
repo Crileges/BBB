@@ -20,20 +20,7 @@ import java.util.List;
 
 public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecyclerViewAdapter.ViewHolder> {
 
-    public static void setList(List<Quest> list) {
-        QuestRecyclerViewAdapter.list = list;
-        if(adapter != null){
-            adapter.getItemCount();
-            Log.d("tests", Integer.toString(QuestList.getDisplayList().size()));
-
-            adapter = new QuestRecyclerViewAdapter(QuestList.getDisplayList());
-            adapter.notifyDataSetChanged();
-        } else {
-            adapter = new QuestRecyclerViewAdapter(list);
-        }
-    }
-
-    public static List<Quest> list;
+    public List<Quest> list;
     public static QuestRecyclerViewAdapter adapter = null;
 
     public QuestRecyclerViewAdapter(List<Quest> items) {

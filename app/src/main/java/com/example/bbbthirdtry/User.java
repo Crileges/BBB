@@ -65,7 +65,7 @@ public class User implements LocationListener {
                     if(QuestList.findQuestByTitle(quest.getTitle()) == null) {
                         QuestList.addOne(quest);
                     }
-                    QuestRecyclerViewAdapter.setList(QuestList.getDisplayList());
+
                     //fügt forever neue Quests ein kp wie zu fixen
                     return;
                 }
