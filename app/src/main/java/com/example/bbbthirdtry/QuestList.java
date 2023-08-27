@@ -47,11 +47,11 @@ public class QuestList {
     }
 
     public static void createList(){
-
         DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.getContext());
         questList = databaseHelper.getQuests();
         filter = new Filter();
         displayList = questList;
+        QuestRecyclerViewAdapter.setList(displayList);
         updateDisplayList();
         databaseHelper.close();
     }
@@ -89,6 +89,7 @@ public class QuestList {
             displayList.add(quest);
         }
         sortList();
+        QuestRecyclerViewAdapter.setList(displayList);
     }
 
     private static void sortList() {
